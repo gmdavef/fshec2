@@ -1,0 +1,35 @@
+name: RL Scan with rl-scanner-composite action
+
+on:
+  pull_request: 
+    types: [opened, reopened]
+
+permissions: 
+  statuses: write
+  pull-requests: write
+  security-events: write
+
+env:
+  REPORT_DIR: "RLreport"
+
+jobs:
+  Build-And-Scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: RL scan
+        continue-on-error: true # Set to false if you want the overall run to fail when the scan detects policy violations
+        id: scan
+
+        env:
+          RLSECURE_ENCODED_LICENSE: ${{ secrets.RL_LIC_KEY }}
+          RLSECURE_SITE_KEY: ${{ secrets.RL_SITE_KEY }}
+
+        uses: reversinglabs/gh-action-rl-scanner-composite@v1
+        with:
+          artifact-to-scan: 'fshec2-1.0.0.tar'
+          report-path: ${{ env.REPORT_DIR }}
+          rl-verbose: true
