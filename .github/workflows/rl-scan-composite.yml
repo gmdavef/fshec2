@@ -28,7 +28,7 @@ jobs:
           RLSECURE_ENCODED_LICENSE: ${{ secrets.RL_LIC_KEY }}
           RLSECURE_SITE_KEY: ${{ secrets.RL_SITE_KEY }}
 
-        uses: reversinglabs/gh-action-rl-scanner-composite@v1
+        uses: reversinglabs/gh-action-rl-scanner-composite@v1.0.3
         with:
           artifact-to-scan: 'fshec2-1.0.0.tar'
           report-path: ${{ env.REPORT_DIR }}
