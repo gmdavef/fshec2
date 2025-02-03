@@ -13,7 +13,7 @@ env:
   REPORT_DIR: "RLreport"
 
 jobs:
-  Build-And-Scan:
+  Scan-the-Binary:
     runs-on: ubuntu-latest
 
     steps:
